@@ -5,33 +5,33 @@
     <title>李林超博客</title>
 </head>
 <body>
-    <p th:text="${msg}">
+<p th:text="${msg}">
         aaaa
-    </p>
+</p>
 <p>
-    <span th:text="${user.nick}">X</span>
-    <span th:text="${user.phone}">135632XXXXXX</span>
-    <span th:text="${user.email}">xxxx@163.com</span>
-    <span th:text="${user.address}">北京XXX</span>
+  <span th:text="${user.nick}">X</span>
+  <span th:text="${user.phone}">135632XXXXXX</span>
+  <span th:text="${user.email}">xxxx@163.com</span>
+  <span th:text="${user.address}">北京XXX</span>
 </p>
 <p th:object="${user}">
-    <span th:text="*{nick}"></span>
-    <span th:text="*{phone}"></span>
-    <span th:text="*{email}"></span>
-    <span th:text="*{address}"></span>
+  <span th:text="*{nick}"></span>
+  <span th:text="*{phone}"></span>
+  <span th:text="*{email}"></span>
+  <span th:text="*{address}"></span>
 </p>
 <p>
-    <spen th:text="*{user.nick}"></spen>
-    <spen th:text="*{user.phone}"></spen>
-    <spen th:text="*{user.email}"></spen>
-    <spen th:text="*{user.address}"></spen>
+  <spen th:text="*{user.nick}"></spen>
+  <spen th:text="*{user.phone}"></spen>
+  <spen th:text="*{user.email}"></spen>
+  <spen th:text="*{user.address}"></spen>
 </p>
 <p>
-    <a href="info.html" th:href="@{'http://localhost:8080/user/info?id='+${user.id}}">查看</a>
-    <a href="info.html" th:href="@{'http://localhost:8080/user/info?id='+${user.id}+'&amp;phone='+${user.phone}}">查看</a>
-    <a href="info.html" th:href="@{|http://localhost:8080/user/info?id=${user.id}&phone=${user.phone}|}">查看</a>
-    <a href="info.html" th:href="@{'user/info?id='+${user.id}}">查看</a>
-    <a href="info.html" th:href="@{'/user/info?id='+${user.id}}">查看</a>
+  <a href="info.html" th:href="@{'http://localhost:8080/user/info?id='+${user.id}}">查看</a>
+  <a href="info.html" th:href="@{'http://localhost:8080/user/info?id='+${user.id}+'&amp;phone='+${user.phone}}">查看</a>
+  <a href="info.html" th:href="@{|http://localhost:8080/user/info?id=${user.id}&phone=${user.phone}|}">查看</a>
+  <a href="info.html" th:href="@{'user/info?id='+${user.id}}">查看</a>
+  <a href="info.html" th:href="@{'/user/info?id='+${user.id}}">查看</a>
 </p>
 <!--<p>
     <from id="login" th:action="@{/user/login}">
@@ -48,10 +48,81 @@
     <span th:text="${user.email}">xxxx@163.com</span>
     <span th:text="${user.address}">北京XXX</span>
 </p>
-<p>
+<!--<p>
     <p th:text="${#httpServletRequest.getRemoteAddr()}"></p>
     <p th:text="${#httpServletRequest.getAttribute('s')}"></p>
     <p th:text="${#httpSession.getId()}"></p>
+</p>-->
+<p th:each="user2:${userMap}">
+    <span th:text="${user2.key}">X</span>
+    <span th:text="${user2.value.nick}">X</span>
+    <span th:text="${user2.value.phone}">135632XXXXXX</span>
+    <span th:text="${user2.value.email}">xxxx@163.com</span>
+    <span th:text="${user2.value.address}">北京XXX</span>
 </p>
+
+<p>
+    <span th:if="${sex eq 1}">
+        男
+    </span>
+    <span th:if="${sex eq 2}">
+        女
+    </span>
+</p>
+<p>
+    <span th:if="${sex == 1}">
+        男
+    </span>
+    <span th:if="${sex == 2}">
+        女
+    </span>
+</p>
+
+<p>
+    <span th:unless="${sex eq 1}">
+        男
+    </span>
+    <span th:unless="${sex eq 2}">
+        女
+    </span>
+</p>
+<p>
+    <span th:unless="${sex == 1}">
+        男
+    </span>
+    <span th:unless="${sex == 2}">
+        女
+    </span>
+</p>
+<div>
+    <p th:switch="${sex}">
+        <span th:case="1">男</span>
+        <span th:case="2">女</span>
+        <span th:case="*">保密</span>
+    </p>
+</div>
+<script th:src="@{/js/jquery-2.4.min.js}"></script>
+<img th:src="@{/image/logo.png}"/>
+<p>
+    <input type="text" id="msg" name="msg" th:text="${msg}"/>
+    <input type="hidden" id="phone" name="phone" th:value="${user.phone}"/>
+    <input type="hidden" id="address" name="address" th:attr="value='${user.address}'"/>
+</p>
+<p>
+    <span th:attr="data-ref=${user.phone}" th:onclick="'clickMe()'">点击事件</span>
+</p>
+<script>
+    function clickMe(){
+        alert("click");
+    }
+</script>
+<div th:style="'display:block;'">
+    李林超博客
+</div>
+
+<form id="login" th:action="@{/login}" th:method="post">
+.......
+</form>
+<input th:type="text" th:id="${user.nick}" th:name="${user.nick}">
 </body>
 </html>

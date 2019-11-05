@@ -6,7 +6,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 public class HelloController {
@@ -24,6 +26,9 @@ public class HelloController {
         model.addAttribute("user",user);
 
         List<User> userList = new ArrayList<>();
+        //Map集合
+        Map<String,Object> userMap = new HashMap<>();
+
         for(int i=0;i<10;i++){
             User user1 = new User();
             user1.setId(i);
@@ -32,9 +37,12 @@ public class HelloController {
             user1.setEmail(i+"996@163.com");
             user1.setAddress("北京朝阳区"+i);
             userList.add(user1);
+            userMap.put(String.valueOf(i),user1);
         }
         model.addAttribute("userList",userList);
+        model.addAttribute("userMap",userMap);
 
+        model.addAttribute("sex",1);
         return "index";
     }
 }
