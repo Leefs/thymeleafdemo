@@ -43,6 +43,7 @@ public class HelloController {
         model.addAttribute("userMap",userMap);
 
         model.addAttribute("sex",1);
+        model.addAttribute("isFlag",true);
         return "index";
     }
 }

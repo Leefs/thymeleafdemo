@@ -124,5 +124,42 @@
 .......
 </form>
 <input th:type="text" th:id="${user.nick}" th:name="${user.nick}">
+<div th:inline="text">
+    [[${user.phone}]]
+</div>
+<div th:inline="none">
+    [[${user.phone}]]
+</div>
+<div>
+    [[${user.phone}]]
+</div>
+<div th:inline="text">
+    <span>[[${user.phone}]]</span>
+</div>
+
+内联脚本：
+<script th:inline="javascript" type="text/javascript">
+    var user = [[${user.phone}]];
+    alert(user);
+</script>
+<script th:inline="javascript" type="text/javascript">
+    var msg = "hello,"+ [[${user.phone}]];
+    alert(msg);
+</script>
+<p>
+    <a th:href="@{'api/getUser?id='+${user.phone}}"></a>
+</p>
+<p>今年是<span th:text="2019">2000</span>年</p>
+<p>20年后，将是<span th:text="2019+20">2020</span>年</p>
+
+<p th:if="${isFlag == true}">
+    执行操作
+</p>
+<p th:if="${userList == null}">
+    userList为空
+</p>
+<p th:if="${userList != null}">
+    userList不为空
+</p>
 </body>
 </html>
